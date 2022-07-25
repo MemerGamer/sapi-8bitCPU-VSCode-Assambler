@@ -1,26 +1,28 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
+// Assembler import
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+import { Assembler } from "./assembler.js";
+const assembler = new Assembler();
+
 export function activate(context: vscode.ExtensionContext) {
-	
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "sapicpu-assembler" is now active!');
+  context.subscriptions.push(
+    vscode.commands.registerCommand("sapicpu-assembler.assemble", () => {
+      let editorText = "";
+      let output =
+        "Copy your assembled code from here (including 'v2.o raw'): \n";
+      if (vscode.window.activeTextEditor?.document.getText()) {
+        editorText = vscode.window.activeTextEditor?.document.getText();
+      }
+      output = output.concat(assembler.assemble(editorText));
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('sapicpu-assembler.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from SapiCPU Assembler!');
-	});
-
-	context.subscriptions.push(disposable);
+      vscode.window.showInformationMessage(output);
+      vscode.window.createTerminal("Assembler");
+      vscode.window.onDidOpenTerminal((terminal) => {
+        console.log(output);
+      });
+    })
+  );
 }
 
-// this method is called when your extension is deactivated
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export function deactivate() {}
