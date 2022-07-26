@@ -2,12 +2,15 @@
   "name": "sapicpu-assembler",
   "displayName": "SapiCPU Assembler",
   "description": "Assembler for the Sapi 8-bit assembly language.",
+  "icon": "img/SapiCPU_Assembler.png",
+  "publisher": "kovacsbalinthunor",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.69.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Programming Languages"
   ],
   "activationEvents": [
     "onCommand:sapicpu-assembler.assemble"
@@ -19,6 +22,13 @@
         "command": "sapicpu-assembler.assemble",
         "category": "SapiCPU-Assembler",
         "title": "Assemble"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "sapicpu-assembler.assemble",
+        "key": "ctrl+alt+enter",
+        "mac": "shift+cmd+enter"
       }
     ]
   },
@@ -48,5 +58,10 @@
     "typescript": "^4.7.4",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MemerGamer/sapi-8bitCPU-VSCode-Assambler.git"
+  },
+  "homepage": "https://github.com/MemerGamer/sapi-8bitCPU-VSCode-Assambler#readme"
 }
